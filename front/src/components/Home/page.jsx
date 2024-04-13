@@ -1,11 +1,14 @@
 import React from "react";
 
+import { MdOutlineModeEdit } from "react-icons/md";
+
 import PollItem from "@/components/PollItem";
 
 const dummyData = [
   {
     name: "Pole 1",
-    description: "Pole 1 description",
+    description:
+      "Pole 1 descriptionasaudhe jdbhsfrkj dsfhrbevdk jlsadfhgr jkadshfrdg kahsjdegfrv sajkbhdefgr sdjfh ajkfshbr",
     status: "active",
     _id: "1",
     end_date: "2022-12-12",
@@ -38,7 +41,7 @@ const dummyData = [
   {
     name: "Pole 5",
     description: "Pole 5 description",
-    status: "active",
+    status: "pasive",
     _id: "5",
     end_date: "2022-12-12",
     image: "https://picsum.photos/536/354",
@@ -54,7 +57,7 @@ const dummyData = [
   {
     name: "Pole 7",
     description: "Pole 7 description",
-    status: "active",
+    status: "div",
     _id: "7",
     end_date: "2022-12-12",
     image: "https://picsum.photos/536/354",
@@ -75,18 +78,16 @@ const dummyData = [
     end_date: "2022-12-12",
     image: "https://picsum.photos/536/354",
   },
-];
-const dummyDataInactive = [
   {
-    name: "Pole 1",
+    name: "Pole 10",
     description: "Pole 1 description",
-    status: "active",
+    status: "pasive",
     _id: "1",
     end_date: "2022-12-12",
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 2",
+    name: "Pole 11",
     description: "Pole 2 description",
     status: "active",
     _id: "2",
@@ -94,7 +95,7 @@ const dummyDataInactive = [
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 3",
+    name: "Pole 13",
     description: "Pole 3 description",
     status: "active",
     _id: "3",
@@ -102,7 +103,7 @@ const dummyDataInactive = [
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 4",
+    name: "Pole 14",
     description: "Pole 4 description",
     status: "active",
     _id: "4",
@@ -110,7 +111,7 @@ const dummyDataInactive = [
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 5",
+    name: "Pole 15",
     description: "Pole 5 description",
     status: "active",
     _id: "5",
@@ -118,7 +119,7 @@ const dummyDataInactive = [
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 6",
+    name: "Pole 16",
     description: "Pole 6 description",
     status: "active",
     _id: "6",
@@ -126,15 +127,15 @@ const dummyDataInactive = [
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 7",
+    name: "Pole 17",
     description: "Pole 7 description",
-    status: "active",
+    status: "pasive",
     _id: "7",
     end_date: "2022-12-12",
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 8",
+    name: "Pole 18",
     description: "Pole 8 description",
     status: "active",
     _id: "8",
@@ -142,9 +143,9 @@ const dummyDataInactive = [
     image: "https://picsum.photos/536/354",
   },
   {
-    name: "Pole 9",
+    name: "Pole 19",
     description: "Pole 9 description",
-    status: "active",
+    status: "pasive",
     _id: "9",
     end_date: "2022-12-12",
     image: "https://picsum.photos/536/354",
@@ -164,22 +165,22 @@ const Home = () => {
           ></iframe>
         </div>
 
-        <div className="flex flex-col justify-start items-start w-full">
-          <div className="mt-4 grid grid-cols-4 gap-2 overflow-y-auto noscrollbar overflow-x-hidden justify-center items-center mb-10">
-            {dummyData?.map(
-              (
-                poll,
-                index // Add the type annotation for poll
-              ) => (
-                <div
-                  key={index}
-                  className="relative flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
-                  onClick={() => console.log("clicked")}
-                >
-                  <PollItem poll={poll} />
-                </div>
-              )
-            )}
+        <div className="flex flex-col justify-center items-center w-full">
+          <div className="w-full mt-4 grid grid-cols-4 gap-2 overflow-y-auto noscrollbar overflow-x-hidden justify-center items-center mb-10">
+            {dummyData?.map((poll, index) => {
+              if (poll.status === "active") {
+                return (
+                  <div
+                    key={index}
+                    className="max-w-68 max-h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
+                    onClick={() => console.log("clicked")}
+                  >
+                    <PollItem poll={poll} />
+                  </div>
+                );
+              }
+              return null;
+            })}
           </div>
         </div>
         <div className="flex gap-2 justify-start items-center font-semibold text-xl">
@@ -191,16 +192,24 @@ const Home = () => {
           ></iframe>
         </div>
         <div className="flex flex-col justify-start items-start w-full">
-          <div className="mt-4 grid grid-cols-4 gap-2 overflow-y-auto noscrollbar overflow-x-hidden justify-center items-center mb-10">
-            {dummyDataInactive?.map((poll, index) => (
-              <div
-                key={index}
-                className="relative flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
-                onClick={() => console.log("clicked")}
-              >
-                <PollItem poll={poll} />
-              </div>
-            ))}
+          <div className="relative mt-4 grid grid-cols-4 gap-2 overflow-y-auto noscrollbar overflow-x-hidden justify-center items-center mb-10">
+            {dummyData?.map((poll, index) => {
+              if (poll.status === "pasive") {
+                return (
+                  <div
+                    key={index}
+                    className=" max-w-68 max-h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
+                    onClick={() => console.log("clicked")}
+                  >
+                    <PollItem poll={poll} />
+                  </div>
+                );
+              }
+              return null;
+            })}
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg">
+              <MdOutlineModeEdit className="text-white text-xl" />
+            </div>
           </div>
         </div>
       </div>
