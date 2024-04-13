@@ -1,11 +1,21 @@
+"use client";
 import React from "react";
+import PropTypes from "prop-types";
 
 import Image from "next/image";
 
 import Icon from "@/assets/icon.svg";
 import Logo from "@/assets/logo.svg";
 
-const Navbar = () => {
+import { Wallet } from "@/services/near-wallet";
+
+const Navbar = ({ wallet, isSignedIn }) => {
+  const signIn = () => {
+    wallet.signIn();
+  };
+  const signOut = () => {
+    wallet.signOut();
+  };
   return (
     <div className="bg-white h-[70px] border-b-2  border-[#F0F0F1] flex justify-center items-center">
       <div className="w-full h-full pl-24 flex justify-between items-center">
@@ -18,13 +28,30 @@ const Navbar = () => {
           </div>
         </div>
         <div className="h-full">
-          <button className="h-full text-black px-12 py-2 font-medium border-[#F0F0F1] border-l-[1.5px] hover:bg-[#F0F0F1]">
-            Connect Wallet
-          </button>
+          {isSignedIn ? (
+            <button
+              className="h-full text-black px-12 py-2 font-medium border-[#F0F0F1] border-l-[1.5px] hover:bg-[#F0F0F1]"
+              onClick={signOut}
+            >
+              Disconnect {wallet.accountId}
+            </button>
+          ) : (
+            <button
+              onClick={signIn}
+              className="h-full text-black px-12 py-2 font-medium border-[#F0F0F1] border-l-[1.5px] hover:bg-[#F0F0F1]"
+            >
+              Connect Wallet
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
+};
+
+Navbar.propTypes = {
+  wallet: PropTypes.instanceOf(Wallet),
+  isSignedIn: PropTypes.bool.isRequired,
 };
 
 export default Navbar;
