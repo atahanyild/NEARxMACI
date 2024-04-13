@@ -1,1 +1,3 @@
 # NEARxMACI
+
+init
