@@ -268,11 +268,11 @@ const Vote = () => {
               {remainingTime}
             </div>
           </div>
-          <div className="text-lg font-bold mx-2 my-2 text-white overflow-hidden text-ellipsis whitespace-nowrap ">
+          <div className="text-xl font-bold mx-4 my-4 text-white overflow-hidden text-ellipsis whitespace-nowrap ">
             {poll?.name}
           </div>
           <p className="w-[95%] border border-bottom border-[#dadada] mt-2 mr-20 ml-2 opacity-50"></p>
-          <div className="text-xs font-normal mx-2 my-2 text-white ">
+          <div className="text-sm font-normal mx-4 my-4 text-white ">
             {poll?.description}
           </div>
         </div>

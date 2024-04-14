@@ -203,7 +203,7 @@ const Home = () => {
                 return (
                   <div
                     key={index}
-                    className="relative max-w-68 max-h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
+                    className="relative w-68 h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
                     onClick={() => router.push(`/${poll._id}`)}
                   >
                     <PollItem poll={poll} />

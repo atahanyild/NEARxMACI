@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar/page";
 import Home from "@/components/Home/page";
 import { Wallet } from "@/services/near-wallet";
+import Loading from "./loading";
 
 // CONSTANTS
 const MPC_CONTRACT = "multichain-testnet-2.testnet";
@@ -16,6 +17,7 @@ const wallet = new Wallet({
 
 const NavLayout = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const initFunction = async () => {
@@ -32,7 +34,7 @@ const NavLayout = () => {
         <Navbar wallet={wallet} isSignedIn={isSignedIn} />
       </div>
       <div className="relative min-h-screen flex-1 pl-[50px] w-full bg-white">
-        <Home />
+        {isLoading ? <Loading /> : <Home />}
       </div>
     </div>
   );
