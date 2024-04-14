@@ -1,6 +1,7 @@
 import React from "react";
 
-import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineHowToVote } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 import PollItem from "@/components/PollItem";
 
@@ -11,7 +12,7 @@ const dummyData = [
       "Pole 1 descriptionasaudhe jdbhsfrkj dsfhrbevdk jlsadfhgr jkadshfrdg kahsjdegfrv sajkbhdefgr sdjfh ajkfshbr",
     status: "active",
     _id: "1",
-    end_date: "2022-12-12",
+    end_date: "2024-04-14 00:17",
     image: "https://picsum.photos/536/354",
   },
   {
@@ -19,7 +20,7 @@ const dummyData = [
     description: "Pole 2 description",
     status: "active",
     _id: "2",
-    end_date: "2022-12-12",
+    end_date: "2024-04-13 ",
     image: "https://picsum.photos/536/354",
   },
   {
@@ -153,6 +154,7 @@ const dummyData = [
 ];
 
 const Home = () => {
+  const router = useRouter();
   return (
     <div className=" mt-[100px]  flex justify-center items-center">
       <div className="w-[91%]">
@@ -172,10 +174,13 @@ const Home = () => {
                 return (
                   <div
                     key={index}
-                    className="max-w-68 max-h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
-                    onClick={() => console.log("clicked")}
+                    className="relative max-w-68 max-h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
+                    onClick={() => router.push(`/${poll._id}`)}
                   >
                     <PollItem poll={poll} />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                      <MdOutlineHowToVote className="text-white text-3xl" />
+                    </div>
                   </div>
                 );
               }
@@ -192,24 +197,24 @@ const Home = () => {
           ></iframe>
         </div>
         <div className="flex flex-col justify-start items-start w-full">
-          <div className="relative mt-4 grid grid-cols-4 gap-2 overflow-y-auto noscrollbar overflow-x-hidden justify-center items-center mb-10">
+          <div className="mt-4 grid grid-cols-4 gap-2 overflow-y-auto noscrollbar overflow-x-hidden justify-center items-center mb-10">
             {dummyData?.map((poll, index) => {
               if (poll.status === "pasive") {
                 return (
                   <div
                     key={index}
-                    className=" max-w-68 max-h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
-                    onClick={() => console.log("clicked")}
+                    className="relative max-w-68 max-h-68 flex bg-[#18181B] rounded-lg shadow-md p-3 items-center justify-center cursor-pointer"
+                    onClick={() => router.push(`/${poll._id}`)}
                   >
                     <PollItem poll={poll} />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                      <MdOutlineHowToVote className="text-white text-3xl" />
+                    </div>
                   </div>
                 );
               }
               return null;
             })}
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg">
-              <MdOutlineModeEdit className="text-white text-xl" />
-            </div>
           </div>
         </div>
       </div>
