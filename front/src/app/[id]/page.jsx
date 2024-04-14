@@ -296,10 +296,8 @@ const Vote = () => {
           <button className="w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6">
             Vote
           </button>
+          <LoadingComp />
         </div>
-      </div>
-      <div className="relative">
-        <LoadingComp />
       </div>
     </div>
   );
