@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -178,6 +178,23 @@ const Vote = () => {
   const [remainingTime, setRemainingTime] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
+  const [voteCount, setVoteCount] = useState([
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+  ]);
+
+  const [isVoted, setIsVoted] = useState(false);
+
+  const sum = useMemo(() => {
+    const toplam = voteCount.reduce(
+      (acc, currentValue) => acc + currentValue,
+      0
+    );
+    return toplam;
+  }, [voteCount]);
+
   useEffect(() => {
     const calculateTimeLeft = () => {
       const endDate = new Date(poll.end_date);
@@ -270,17 +287,37 @@ const Vote = () => {
               <li
                 key={option.name}
                 onClick={() => setSelectedOption(option.name)}
-                className={`transition-all w-[95%] h-[50px] flex justify-start pl-4 items-center text-black border border-[#e6e6e6] font-semibold text-lg mt-2 ${
-                  selectedOption === option.name
+                className={`transition-all w-[95%] h-[50px] relative  text-black border border-[#e6e6e6] font-semibold text-lg mt-2 ${
+                  !isVoted &&
+                  (selectedOption === option.name
                     ? "bg-[#cecece]"
-                    : " hover:bg-[#e6e6e6]"
+                    : " hover:bg-[#e6e6e6]")
                 }`}
               >
-                {option.name}
+                <p className="absolute top-1/2 -translate-y-1/2 left-5">
+                  {option.name}
+                </p>
+                {isVoted && (
+                  <div
+                    className={` absolute top-0 left-0 h-full flex justify-between  pl-4  items-center  w-[${
+                      (voteCount[index] / sum) * 100
+                    }%] bg-black`}
+                  ></div>
+                )}
               </li>
             ))}
           </ul>
-          <button className="w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6">
+          <button
+            onClick={() => {
+              setIsVoted(true);
+              const newVoteCount = [...voteCount];
+              const index = options.findIndex((i) => i.name === selectedOption);
+              console.log(index);
+              newVoteCount[index] = voteCount[index] + 1;
+              setVoteCount(newVoteCount);
+            }}
+            className="w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6"
+          >
             Vote
           </button>
           <LoadingComp />
