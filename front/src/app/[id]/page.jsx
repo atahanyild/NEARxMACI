@@ -155,6 +155,12 @@ const dummyData = [
     image: "https://picsum.photos/536/354",
   },
 ];
+const options = [
+  { name: "Option 1", percentage: 75 },
+  { name: "Option 2", percentage: 50 },
+  { name: "Option 3", percentage: 25 },
+  { name: "Option 4", percentage: 85 },
+];
 
 const MPC_CONTRACT = "multichain-testnet-2.testnet";
 
@@ -169,6 +175,7 @@ const Vote = () => {
   const poll = dummyData.find((p) => p.id === pollId);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [remainingTime, setRemainingTime] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -226,11 +233,11 @@ const Vote = () => {
   }, []);
 
   return (
-    <div className="flex flex-col flex-1 bg-white h-screen overflow-hidden">
+    <div className="flex flex-1 bg-white h-screen overflow-hidden overflow-x-hidden">
       <div className="fixed transition-all top-0 left-0 w-full z-50">
         <Navbar wallet={wallet} isSignedIn={isSignedIn} />
       </div>
-      <div className="w-1/4 min-h-screen max-h-screen flex-1 bg-[#ababab] ">
+      <div className="w-1/4 min-h-screen max-h-screen bg-[#ababab] overflow-x-hidden">
         <div className="relative overflow-hidden w-full flex flex-col justify-center mt-[90px]">
           <Image src={poll?.image} width={800} height={500} alt="image" />
           <div
@@ -243,7 +250,7 @@ const Vote = () => {
               {remainingTime}
             </div>
           </div>
-          <div className="text-lg  mx-2 my-2 text-white overflow-hidden text-ellipsis whitespace-nowrap font-semibold">
+          <div className="text-lg font-bold mx-2 my-2 text-white overflow-hidden text-ellipsis whitespace-nowrap ">
             {poll?.name}
           </div>
           <p className="w-[95%] border border-bottom border-[#dadada] mt-2 mr-20 ml-2 opacity-50"></p>
@@ -263,6 +270,31 @@ const Vote = () => {
               Option 3
             </AccordionItem>
           </Accordion>
+        </div>
+      </div>
+      <div className="w-full flex-1 bg-white h-full mt-[100px] gap-4 ml-20 overflow-hidden">
+        <div>
+          <div className="text-2xl text-black font-semibold tacking-[1.28px] mb-8">
+            Hangisi Kazanır?
+          </div>
+          <ul>
+            {options.map((option, index) => (
+              <li
+                key={option.name}
+                onClick={() => setSelectedOption(option.name)}
+                className={`transition-all w-[95%] h-[50px] flex justify-start pl-4 items-center text-black border border-[#e6e6e6] font-semibold text-lg mt-2 ${
+                  selectedOption === option.name
+                    ? "bg-[#cecece]"
+                    : " hover:bg-[#e6e6e6]"
+                }`}
+              >
+                {option.name}
+              </li>
+            ))}
+          </ul>
+          <button className="w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6">
+            Vote
+          </button>
         </div>
       </div>
     </div>
