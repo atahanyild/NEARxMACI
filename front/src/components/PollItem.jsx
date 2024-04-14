@@ -52,7 +52,7 @@ const PollItem = ({ poll }) => {
   }, [poll.end_date]);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden w-68 h-68">
       <Image src={poll?.image} width={400} height={250} alt="image" />
       <div
         className={`absolute top-0 right-0 z-20 ${
