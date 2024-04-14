@@ -7,6 +7,7 @@ import { Accordion, AccordionItem } from "@nextui-org/react";
 
 import Navbar from "@/components/Navbar/page";
 import { Wallet } from "@/services/near-wallet";
+import LoadingComp from "@/components/VotingLoading";
 
 const dummyData = [
   {
@@ -296,6 +297,9 @@ const Vote = () => {
             Vote
           </button>
         </div>
+      </div>
+      <div className="relative">
+        <LoadingComp />
       </div>
     </div>
   );
