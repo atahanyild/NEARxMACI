@@ -259,19 +259,6 @@ const Vote = () => {
             {poll?.description}
           </div>
         </div>
-        <div>
-          <Accordion className="text-black font-bold">
-            <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
-              Option 1
-            </AccordionItem>
-            <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
-              Option 2
-            </AccordionItem>
-            <AccordionItem key="3" aria-label="Accordion 3" title="Accordion 3">
-              Option 3
-            </AccordionItem>
-          </Accordion>
-        </div>
       </div>
       <div className="w-full flex-1 bg-white h-full mt-[100px] gap-4 ml-20 overflow-hidden">
         <div>
