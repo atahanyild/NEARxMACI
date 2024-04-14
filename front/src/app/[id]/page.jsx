@@ -11,13 +11,13 @@ import LoadingComp from "@/components/VotingLoading";
 
 const dummyData = [
   {
-    name: "Pole 1",
+    name: "Boden or Tremp",
     description:
-      "Pole 1 descriptionasaudhe jdbhsfrkj dsfhrbevdk jlsadfhgr jkadshfrdg kahsjdegfrv sajkbhdefgr sdjfh ajkfshbr",
+      "Which memetoken has better community? VOTE for your choice. Boden or Tremp. Who will WIN?",
     status: "active",
     _id: "1",
-    end_date: "2024-04-14 00:17",
-    image: "https://picsum.photos/536/354",
+    end_date: "2024-04-14 13:00",
+    image: "/WhatsApp Image 2024-04-14 at 11.47.35.jpeg",
   },
   {
     name: "Pole 2",
@@ -178,6 +178,9 @@ const Vote = () => {
   const [remainingTime, setRemainingTime] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
+  const [canRegister, setCanRegister] = useState(false);
+  const [canVote, setCanVote] = useState(false);
+
   const [voteCount, setVoteCount] = useState([
     Math.floor(Math.random() * 1000),
     Math.floor(Math.random() * 1000),
@@ -186,13 +189,14 @@ const Vote = () => {
   ]);
 
   const [isVoted, setIsVoted] = useState(false);
+  const [voteLoading, setVoteLoading] = useState(false);
 
   const sum = useMemo(() => {
     const toplam = voteCount.reduce(
       (acc, currentValue) => acc + currentValue,
       0
     );
-    return toplam;
+    return voteCount.map((vc) => (vc ? (vc / toplam) * 100 : 0));
   }, [voteCount]);
 
   useEffect(() => {
@@ -294,33 +298,54 @@ const Vote = () => {
                     : " hover:bg-[#e6e6e6]")
                 }`}
               >
-                <p className="absolute top-1/2 -translate-y-1/2 left-5">
+                <p className="z-10 absolute top-1/2 -translate-y-1/2 left-5">
                   {option.name}
                 </p>
                 {isVoted && (
+                  <p className="z-10 absolute top-1/2 -translate-y-1/2 right-5">
+                    {voteCount[index]}
+                  </p>
+                )}
+                {isVoted && (
                   <div
-                    className={` absolute top-0 left-0 h-full flex justify-between  pl-4  items-center  w-[${
-                      (voteCount[index] / sum) * 100
-                    }%] bg-black`}
+                    style={{ width: `${sum[index]}%` }}
+                    className={` absolute top-0 left-0 h-full flex  pl-4  items-center bg-[#e6e6e6]`}
                   ></div>
                 )}
               </li>
             ))}
           </ul>
+          <button className="w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6">
+            Generate MACI Wallet
+          </button>
           <button
+            disabled={!canRegister}
+            className="disabled:opacity-40 w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6"
+          >
+            Register to Vote
+          </button>
+          <button
+            disabled={!canVote}
             onClick={() => {
-              setIsVoted(true);
+              setVoteLoading(true);
+              setTimeout(() => {
+                setVoteLoading(false);
+                setIsVoted(true);
+              }, 3000);
+
               const newVoteCount = [...voteCount];
               const index = options.findIndex((i) => i.name === selectedOption);
               console.log(index);
               newVoteCount[index] = voteCount[index] + 1;
               setVoteCount(newVoteCount);
             }}
-            className="w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6"
+            className="disabled:opacity-40 w-[95%] h-[50px] bg-[#131313] text-white font-semibold text-lg mt-6"
           >
-            Vote
+            {voteLoading && "Voting"}
+            {!voteLoading && isVoted && "Voted"}
+            {!voteLoading && !isVoted && "Vote"}
           </button>
-          <LoadingComp />
+          {voteLoading && <LoadingComp />}
         </div>
       </div>
     </div>

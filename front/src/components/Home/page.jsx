@@ -7,13 +7,13 @@ import PollItem from "@/components/PollItem";
 
 const dummyData = [
   {
-    name: "Pole 1",
+    name: "Boden or Tremp",
     description:
-      "Pole 1 descriptionasaudhe jdbhsfrkj dsfhrbevdk jlsadfhgr jkadshfrdg kahsjdegfrv sajkbhdefgr sdjfh ajkfshbr",
+      "Which memetoken has better community? VOTE for your choice. Boden or Tremp. Who will WIN?",
     status: "active",
     _id: "1",
-    end_date: "2024-04-14 00:17",
-    image: "https://picsum.photos/536/354",
+    end_date: "2024-04-14 13:00",
+    image: "/WhatsApp Image 2024-04-14 at 11.47.35.jpeg",
   },
   {
     name: "Pole 2",
